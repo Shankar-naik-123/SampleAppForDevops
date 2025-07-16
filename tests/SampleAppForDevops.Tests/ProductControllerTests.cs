@@ -31,6 +31,7 @@ namespace SampleAppForDevops.Tests
 			var result = await _controller.GetAll();
 
 			var okResult = Assert.IsType<OkObjectResult>(result);
+
 			Assert.Equal(list, okResult.Value);
 		}
 
