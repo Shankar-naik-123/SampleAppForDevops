@@ -66,11 +66,11 @@ namespace SampleAppForDevops.Controllers
 				.ToList();
 			return Ok(matches);
 		}
-		[HttpGet("dummy")]
+		/*[HttpGet("dummy")]
 		public async Task<IActionResult> DummyAPI()
 		{
 			
 			return Ok("I am a dummy api");
-		}
+		}*/
 	}
 }
