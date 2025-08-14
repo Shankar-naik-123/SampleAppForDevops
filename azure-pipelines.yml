@@ -23,7 +23,7 @@ stages:
     - script: echo unittesting front end app
       displayName: unittesting FrontEnd
 
-- stage: Deploy To Dev
+- stage: DeployToDev
   displayName:  Deploying FE + BE to dev environment
   jobs:
   - job: BackendDeployment
@@ -37,7 +37,7 @@ stages:
     - script: echo frontEnd deployment to Dev Environment
       displayName: frontEnd Deploy to Dev    
 
-- stage: Deploy To UAT
+- stage: DeployToUAT
   displayName:  Deploying FE + BE to UAT environment
   jobs:
   - job: BackendDeployment
@@ -51,7 +51,7 @@ stages:
     - script: echo frontEnd deployment to UAT Environment
       displayName: frontEnd Deploy to UAT   
 
-- stage: Deploy To Prod
+- stage: DeployToProd
   displayName:  Deploying FE + BE to Prod environment
   jobs:
   - job: BackendDeployment
