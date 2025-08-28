@@ -35,7 +35,7 @@ stages:
           projects: '**/*.csproj'
           arguments: '--configuration $(buildConfiguration)'
 
-      - script: dotnet test **/tests/*.csproj  --configuration $(buildConfiguration) --collect "Code Coverage"
+      - script: dotnet test **/tests/SampleAppForDevops.Tests/*.csproj  --configuration $(buildConfiguration) --collect "Code Coverage"
         displayName: Run Tests
 
 
