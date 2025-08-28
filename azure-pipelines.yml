@@ -33,7 +33,7 @@ stages:
           projects: '**/*.csproj'
           arguments: 'BuildConfiguration $(buildConfiguration)'
 
-      - script: dotnet test BuildConfiguration $(buildConfiguration)
+      - script: dotnet test  --Project '**/tests/*.csproj'  -- BuildConfiguration $(buildConfiguration)
 
 
     
