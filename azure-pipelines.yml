@@ -15,10 +15,12 @@ stages:
       displayName: restore build and test
       steps:
       - task: UseDotNet@2
+        displayName: Install dotnet 8 sdk
         inputs:
           packageType: 'sdk'
-          version: '8.0.x'
+          version: '8.x'
           includePreviewVersions: true
+          performMultiLevelLookup: true
           
       - task: DotNetCoreCLI@2
         inputs:
