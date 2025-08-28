@@ -1,66 +1,32 @@
 trigger:
 - master
 
+variables:
+- name: buildConfiguration
+  value: release
+
 pool:
-  name: BuildAgents-Linux
-
+ name: WindowsAgentPool
+ 
 stages:
-- stage: BuidSolutions
-  displayName: Building backend and FrontEnd application
+- stage: BuildSolution 
   jobs:
-  - job: BuildBackend
-    displayName: Building Backend solution
-    steps:
-    - script: echo building backend app
-      displayName: building backend
-    - script: echo unittesting backend app
-      displayName: unittesting backend 
-  - job: BuildFrontEndApp
-    displayName: Buidling FronEnd app
-    steps : 
-    - script: echo building FrontEnd app
-      displayName: building FrontEnd 
-    - script: echo unittesting front end app
-      displayName: unittesting FrontEnd
+    - job: restoreAndBuild
+      displayName: restore build and test
+      steps:
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: restore
+          projects: '**/*.csproj'
+       
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: 'build'
+          projects: '**/*.csproj'
+          arguments: 'BuildConfiguration $(buildConfiguration)'
 
-- stage: DeployToDev
-  displayName:  Deploying FE + BE to dev environment
-  jobs:
-  - job: BackendDeployment
-    displayName: BE to dev environment
-    steps:
-    - script: echo backend deployment to Dev Environment
-      displayName: Backend Deploy to Dev
-  - job: FrontEndDeployment
-    displayName: FE to dev environment
-    steps:
-    - script: echo frontEnd deployment to Dev Environment
-      displayName: frontEnd Deploy to Dev    
+      - script: dotnet test BuildConfiguration $(buildConfiguration)
 
-- stage: DeployToUAT
-  displayName:  Deploying FE + BE to UAT environment
-  jobs:
-  - job: BackendDeployment
-    displayName: BE to UAT environment
-    steps:
-    - script: echo backend deployment to UAT Environment
-      displayName: Backend Deploy to UAT
-  - job: FrontEndDeployment
-    displayName: FE to UAT environment
-    steps:
-    - script: echo frontEnd deployment to UAT Environment
-      displayName: frontEnd Deploy to UAT   
 
-- stage: DeployToProd
-  displayName:  Deploying FE + BE to Prod environment
-  jobs:
-  - job: BackendDeployment
-    displayName: BE to Prod environment
-    steps:
-    - script: echo backend deployment to Prod Environment
-      displayName: Backend Deploy to Prod
-  - job: FrontEndDeployment
-    displayName: FE to Prod environment
-    steps:
-    - script: echo frontEnd deployment to Prod Environment
-      displayName: frontEnd Deploy to Prod  
+    
+    
