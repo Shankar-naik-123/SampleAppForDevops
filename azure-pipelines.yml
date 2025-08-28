@@ -31,9 +31,9 @@ stages:
         inputs:
           command: 'build'
           projects: '**/*.csproj'
-          arguments: 'BuildConfiguration $(buildConfiguration)'
+          arguments: 'configuration $(buildConfiguration)'
 
-      - script: dotnet test  --Project '**/tests/*.csproj'  -- BuildConfiguration $(buildConfiguration)
+      - script: dotnet test  --Projects '**/tests/*.csproj'  -- configuration $(buildConfiguration)
 
 
     
