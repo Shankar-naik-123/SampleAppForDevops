@@ -23,17 +23,19 @@ stages:
           performMultiLevelLookup: true
           
       - task: DotNetCoreCLI@2
+        displayName: restore packages
         inputs:
           command: restore
           projects: '**/*.csproj'
        
       - task: DotNetCoreCLI@2
+        displayName: Build Projects
         inputs:
           command: 'build'
           projects: '**/*.csproj'
           arguments: 'configuration $(buildConfiguration)'
 
-      - script: dotnet test  --Projects '**/tests/*.csproj'  -- configuration $(buildConfiguration)
+      - script: dotnet test **/tests/*.csproj  -- configuration $(buildConfiguration)
 
 
     
