@@ -25,7 +25,7 @@ stages:
       - task: DotNetCoreCLI@2
         displayName: restore packages
         inputs:
-          command: restore
+          command: 'restore'
           projects: '**/*.csproj'
        
       - task: DotNetCoreCLI@2
@@ -38,7 +38,7 @@ stages:
       - task: DotNetCoreCLI@2
         displayName: Run Tests
         inputs:
-          command: Test
+          command: 'test'
           projects: '**/tests/SampleAppForDevops.Tests/*.Tests.csproj'
           arguments: '--configuration $(buildConfiguration)'
 
