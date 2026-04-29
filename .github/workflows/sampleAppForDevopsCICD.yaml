@@ -13,7 +13,7 @@ jobs:
    - name: setup dotnet 
      uses: actions/setup-dotnet@v4
      with: 
-      dotnet-version: ${{DOTNET_VERSION}}
+      dotnet-version: ${{env.DOTNET_VERSION}}
    - name: restore
      run: dotnet  restore ./src/SampleAppForDevops/SampleAppForDevops.csproj
    - name: build
