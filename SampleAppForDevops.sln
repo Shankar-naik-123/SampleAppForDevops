@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1B4978B8-A7C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleAppForDevops", "src\SampleAppForDevops\SampleAppForDevops.csproj", "{09AF3726-D829-4DFD-B232-35428BF2AE6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleAppForDevops.Tests", "tests\SampleAppForDevops.Tests\SampleAppForDevops.Tests.csproj", "{F9CC952B-B421-4BCD-9C48-E1F87A66EBDB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleAppForDevops.Tests", "src\SampleAppForDevops.Tests\SampleAppForDevops.Tests.csproj", "{3CDBBD7B-1181-4A50-AE9D-5396B25BC905}"
 EndProject
 Global
@@ -21,10 +19,6 @@ Global
 		{09AF3726-D829-4DFD-B232-35428BF2AE6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09AF3726-D829-4DFD-B232-35428BF2AE6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09AF3726-D829-4DFD-B232-35428BF2AE6A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9CC952B-B421-4BCD-9C48-E1F87A66EBDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9CC952B-B421-4BCD-9C48-E1F87A66EBDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9CC952B-B421-4BCD-9C48-E1F87A66EBDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9CC952B-B421-4BCD-9C48-E1F87A66EBDB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3CDBBD7B-1181-4A50-AE9D-5396B25BC905}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3CDBBD7B-1181-4A50-AE9D-5396B25BC905}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CDBBD7B-1181-4A50-AE9D-5396B25BC905}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,7 +29,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{09AF3726-D829-4DFD-B232-35428BF2AE6A} = {1B4978B8-A7C8-40B7-996D-E1208DB6607D}
-		{F9CC952B-B421-4BCD-9C48-E1F87A66EBDB} = {00000000-0000-0000-0000-000000000000}
 		{3CDBBD7B-1181-4A50-AE9D-5396B25BC905} = {1B4978B8-A7C8-40B7-996D-E1208DB6607D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

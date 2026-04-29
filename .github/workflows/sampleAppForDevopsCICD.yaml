@@ -1,0 +1,28 @@
+name: Sample App For Devops Api webappdeploy
+on:
+  workflow_dispatch: 
+env:
+  DOTNET_VERSION: "8.0"
+
+jobs:
+  buid-and-deploy:
+   runs-on: windows-latest
+   steps: 
+   - name: checkout
+     uses: actions/checkout@v4
+   - name: setup dotnet 
+     uses: actions/setup-dotnet@v4
+     with: 
+      dotnet-version: ${{DOTNET_VERSION}}
+   - name: restore
+     run: dotnet  restore ./src/SampleAppForDevops/SampleAppForDevops.csproj
+   - name: build
+     run: dotnet build ./src/SampleAppForDevops/SampleAppForDevops.csproj
+      --configuration Release
+   - name: test
+     run: dotnet test ./src/SampleAppForDevops.Tests/SampleAppForDevops.Tests.csproj
+   - name: publish
+     run: dotnet publish --configuration Release --output ./publish        
+
+    
+
