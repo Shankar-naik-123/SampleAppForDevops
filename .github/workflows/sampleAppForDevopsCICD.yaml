@@ -1,35 +1,40 @@
 name: Sample App For Devops Api webappdeploy
+
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
+
 env:
   DOTNET_VERSION: "8.0"
   WEBAPP_NAME: "SchoolApi"
 
 jobs:
-  buid-and-deploy:
-   runs-on: ubuntu-latest
-   steps: 
-   - name: checkout
-     uses: actions/checkout@v4
-   - name: setup dotnet 
-     uses: actions/setup-dotnet@v4
-     with: 
-      dotnet-version: ${{env.DOTNET_VERSION}}
-   - name: restore
-     run: dotnet  restore ./src/SampleAppForDevops/SampleAppForDevops.csproj
-   - name: build
-     run: dotnet build ./src/SampleAppForDevops/SampleAppForDevops.csproj --configuration Release
-   - name: test
-     run: dotnet test ./src/SampleAppForDevops.Tests/SampleAppForDevops.Tests.csproj
-   - name: publish
-     run: dotnet publish ./src/SampleAppForDevops/SampleAppForDevops.csproj --configuration Release --output ./publish        
-   - name: Deploy to Azure App Service
-     uses: azure/webapps-deploy@v3
-     with: 
-      app-name: ${{env.WEBAPP_NAME}}
-      publish-profile: ${{ secrets.WEBAPP_PUBLISH_PROFILE}}
-      package: ./publish
-             
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-    
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
 
+      - name: setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: restore
+        run: dotnet restore ./src/SampleAppForDevops/SampleAppForDevops.csproj
+
+      - name: build
+        run: dotnet build ./src/SampleAppForDevops/SampleAppForDevops.csproj --configuration Release
+
+      - name: test
+        run: dotnet test ./src/SampleAppForDevops.Tests/SampleAppForDevops.Tests.csproj
+
+      - name: publish
+        run: dotnet publish ./src/SampleAppForDevops/SampleAppForDevops.csproj -c Release -o ./publish
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.WEBAPP_NAME }}
+          publish-profile: ${{ secrets.WEBAPP_PUBLISH_PROFILE }}
+          package: ./publish
