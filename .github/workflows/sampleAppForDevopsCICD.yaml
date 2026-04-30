@@ -18,8 +18,7 @@ jobs:
    - name: restore
      run: dotnet  restore ./src/SampleAppForDevops/SampleAppForDevops.csproj
    - name: build
-     run: dotnet build ./src/SampleAppForDevops/SampleAppForDevops.csproj
-      --configuration Release
+     run: dotnet build ./src/SampleAppForDevops/SampleAppForDevops.csproj --configuration Release
    - name: test
      run: dotnet test ./src/SampleAppForDevops.Tests/SampleAppForDevops.Tests.csproj
    - name: publish
@@ -27,8 +26,8 @@ jobs:
    - name: Deploy to Azure App Service
      uses: azure/webapps-deploy@v3
      with: 
-      app-Name: ${{env.WEBAPP_NAME}}
-      publish-profile: ${{secrets.WEBAPP_PUBLISH_PROFILE}}
+      app-name: ${{env.WEBAPP_NAME}}
+      publish-profile: ${{ secrets.WEBAPP_PUBLISH_PROFILE}}
       package: ./publish
              
 
