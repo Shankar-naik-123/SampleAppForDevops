@@ -23,7 +23,7 @@ jobs:
    - name: test
      run: dotnet test ./src/SampleAppForDevops.Tests/SampleAppForDevops.Tests.csproj
    - name: publish
-     run: dotnet publish --configuration Release --output ./publish        
+     run: dotnet publish ./src/SampleAppForDevops/SampleAppForDevops.csproj --configuration Release --output ./publish        
    - name: Deploy to Azure App Service
      uses: azure/webapps-deploy@v3
      with: 
