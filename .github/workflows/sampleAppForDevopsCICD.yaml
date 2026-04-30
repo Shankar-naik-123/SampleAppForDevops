@@ -7,7 +7,7 @@ env:
 
 jobs:
   buid-and-deploy:
-   runs-on: windows-latest
+   runs-on: ubuntu-latest
    steps: 
    - name: checkout
      uses: actions/checkout@v4
