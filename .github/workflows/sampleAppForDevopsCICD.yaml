@@ -3,6 +3,7 @@ on:
   workflow_dispatch: 
 env:
   DOTNET_VERSION: "8.0"
+  WEBAPP_NAME: "SchoolApi"
 
 jobs:
   buid-and-deploy:
@@ -23,6 +24,13 @@ jobs:
      run: dotnet test ./src/SampleAppForDevops.Tests/SampleAppForDevops.Tests.csproj
    - name: publish
      run: dotnet publish --configuration Release --output ./publish        
+   - name: Deploy to Azure App Service
+     uses: azure/webapps-deploy@v4
+     with: 
+      app-Name: ${{env.WEBAPP_NAME}}
+      publish-profile: ${{secrets.WEBAPP_PUBLISH_PROFILE}}
+      package: ./publish
+             
 
     
 
