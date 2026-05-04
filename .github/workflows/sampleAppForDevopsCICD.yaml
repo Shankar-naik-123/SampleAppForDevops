@@ -2,15 +2,22 @@ name: Sample App For Devops Api webappdeploy
 
 on:
   workflow_dispatch:
+  push: 
+   branches: ["main","dev"]
+  pull_request: 
+   branches: ["main","dev"] 
+
 
 env:
-  DOTNET_VERSION: "8.0"
+  DOTNET_VERSION: "8.0.x"
   WEBAPP_NAME: "SchoolApi"
 
 jobs:
   build-and-deploy:
     runs-on: windows-latest
-
+    env: 
+     PROJECT_PATH: "./src/SampleAppForDevops/SampleAppForDevops.csproj"
+     PROJECT_TEST_PATH: "./src/SampleAppForDevops.Tests/SampleAppForDevops.Tests.csproj"
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -20,17 +27,23 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      - name: cache Nuget
+        uses: actions/cache@v4
+        with: 
+          path: ~/.nuget/packages
+          key: ${{runner.os}}--nuget--${{hashfiles('**/*.csproj')}}
+
       - name: restore
-        run: dotnet restore ./src/SampleAppForDevops/SampleAppForDevops.csproj
+        run: dotnet restore ${{env.PROJECT_PATH}}
 
       - name: build
-        run: dotnet build ./src/SampleAppForDevops/SampleAppForDevops.csproj --configuration Release
+        run: dotnet build ${{env.PROJECT_PATH}} --configuration Release
 
       - name: test
-        run: dotnet test ./src/SampleAppForDevops.Tests/SampleAppForDevops.Tests.csproj
+        run: dotnet test ${{env.PROJECT_TEST_PATH}} 
 
       - name: publish
-        run: dotnet publish ./src/SampleAppForDevops/SampleAppForDevops.csproj -c Release -o ./publish
+        run: dotnet publish ${{env.PROJECT_PATH}} -c Release -o ./publish
 
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v3
