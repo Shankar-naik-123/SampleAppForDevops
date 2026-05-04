@@ -3,9 +3,9 @@ name: Sample App For Devops Api webappdeploy
 on:
   workflow_dispatch:
   push: 
-   branches: ["main","dev"]
+   branches: ["main","dev","master"]
   pull_request: 
-   branches: ["main","dev"] 
+   branches: ["main","dev","master"] 
 
 
 env:
