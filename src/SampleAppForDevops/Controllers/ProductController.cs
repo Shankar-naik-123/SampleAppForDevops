@@ -70,7 +70,7 @@ namespace SampleAppForDevops.Controllers
 		public async Task<IActionResult> DummyAPI()
 		{
 			
-			return Ok("I am a dummy api version 3 ");
+			return Ok("I am a dummy api version 4");
 		}
 	}
 }
