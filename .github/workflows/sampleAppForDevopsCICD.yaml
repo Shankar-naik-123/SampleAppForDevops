@@ -1,4 +1,4 @@
-name: Sample App For Devops Api webappdeploy
+name: Sample App For Devops Api webappdeploy.
 
 on:
   workflow_dispatch:
