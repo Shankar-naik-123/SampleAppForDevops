@@ -71,7 +71,7 @@ jobs:
       - name: Start Sonar scanner Analysis
         run: |
           dotnet sonarscanner begin `
-          /k:"Shankar-naik-123" `
+          /k:"Shankar-naik-123_SampleAppForDevops" `
           /o:"Shankar-naik-123" `
           /d:sonar.login="${{secrets.SONAR_TOKEN}}" `
           /d:sonar.host.url="https://sonarcloud.io"      
