@@ -65,7 +65,7 @@ jobs:
          distribution: 'temurin'
          java-version: '17'
 
-      - name: Install SonarCloud tool for dotnet
+      - name: Install SonarCloud tool for  dotnet
         run: dotnet tool install --global dotnet-sonarscanner
 
       - name: Start Sonar scanner Analysis
