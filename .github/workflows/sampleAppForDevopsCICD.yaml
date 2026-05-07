@@ -72,7 +72,7 @@ jobs:
         run: dotnet test ${{env.PROJECT_TEST_PATH}} \
          --configuration Release \
          --no-build \
-         --collect:"XPlat Code Coverage"
+         --collect:"XPlat Code Coverage" \
          --logger "trx;LogFileName=test-results.trx"
       
       # Upload Test results to Github UI because Test result file will be cleared once runner shutsdown
