@@ -26,12 +26,35 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+      
+      
+      # Cache NuGet packages in the runner's ~/.nuget/packages directory.
+      # This is where `dotnet restore` installs all NuGet dependencies.
+
+      # We use a hash of all .csproj files as part of the cache key.
+      # Any change in project dependencies will change the hash → causing a cache miss.
+
+      # Behavior:
+      # - Cache hit:
+      #   The action restores previously cached packages into ~/.nuget/packages.
+      #   So `dotnet restore` will reuse them and avoid downloading again.
+
+      # - Cache miss:
+      #   No packages are restored.
+      #   `dotnet restore` will download all dependencies from scratch.
+
+      # After the job completes:
+      # If there was a cache miss, the newly downloaded packages are saved to cache
+      # using the updated key for future runs.
 
       - name: cache Nuget
         uses: actions/cache@v4
         with: 
           path: ~/.nuget/packages
           key: ${{runner.os}}--nuget--${{hashfiles('**/*.csproj')}}
+          restore-keys: |
+           ${{runner.os}}--nuget--
+           
 
       - name: restore
         run: dotnet restore ${{env.PROJECT_PATH}}
@@ -39,8 +62,25 @@ jobs:
       - name: build
         run: dotnet build ${{env.PROJECT_PATH}} --configuration Release
 
-      - name: test
-        run: dotnet test ${{env.PROJECT_TEST_PATH}} 
+
+      #  Test and collect the code coverage result. 
+      # XPlat = Cross Platform (works on Linux/Windows/macOS)
+      # Generates a coverage.cobertura.xml file automatically
+      # Tells you which lines of your code were hit by tests
+
+      - name: test and collect code coverage
+        run: dotnet test ${{env.PROJECT_TEST_PATH}} \
+         --configuration Release \
+         --no-build \
+         --collect:"XPlat Code Coverage"
+         --logger "trx;LogFileName=test-results.trx"
+      
+      # Upload Test results to Github UI because Test result file will be cleared once runner shutsdown
+      - name: Upload Test Artifacts   
+        uses: actions/upload-artifacts@v4
+        with:
+         name: "TestResults"
+         path:  "**/*.trx" 
 
       - name: publish
         run: dotnet publish ${{env.PROJECT_PATH}} -c Release -o ./publish
