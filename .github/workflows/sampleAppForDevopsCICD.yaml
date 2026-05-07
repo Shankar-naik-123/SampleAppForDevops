@@ -76,8 +76,8 @@ jobs:
          --logger "trx;LogFileName=test-results.trx"
       
       # Upload Test results to Github UI because Test result file will be cleared once runner shutsdown
-      - name: Upload Test Artifacts   
-        uses: actions/upload-artifacts@v4
+      - name: Upload Test Artifact   
+        uses: actions/upload-artifact@v4
         with:
          name: "TestResults"
          path:  "**/*.trx" 
