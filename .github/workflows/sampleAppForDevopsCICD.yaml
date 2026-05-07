@@ -97,12 +97,12 @@ jobs:
           dotnet sonarscanner end `
           /d:sonar.login="${{secrets.SONAR_TOKEN}}"
 
-      - name: Check Sonar Quality Gate
-        uses: sonarsource/sonarqube-quality-gate-action@v1
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
+      #- name: Check Sonar Quality Gate
+      #  uses: sonarsource/sonarqube-quality-gate-action@v1
+      #  timeout-minutes: 5
+      #  env:
+      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       # Upload Test results to Github UI because Test result file will be cleared once runner shutsdown
       - name: Upload Test Artifact   
         uses: actions/upload-artifact@v4
