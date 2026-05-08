@@ -1,6 +1,7 @@
 using SampleAppForDevops.Services.Abstractions;
 using SampleAppForDevops.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
